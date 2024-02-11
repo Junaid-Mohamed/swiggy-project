@@ -11,7 +11,7 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
 
   // Whenever state variables update, react triggers a reconciliation cycle(re-renders the component)
-  console.log("Body Rendered");
+  // console.log("Body Rendered");
 
   useEffect(() => {
     fetchData();
@@ -23,10 +23,12 @@ const Body = () => {
     );
 
     const json = await data.json();
-
+    
+    // console.log(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     // Optional Chaining
-    setListOfRestraunt(json?.data?.cards[2]?.data?.data?.cards);
-    setFilteredRestaurant(json?.data?.cards[2]?.data?.data?.cards);
+    // console.log(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants[0]);
+    setListOfRestraunt(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setFilteredRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   };
 
   return listOfRestaurants.length === 0 ? (
@@ -47,10 +49,10 @@ const Body = () => {
             onClick={() => {
               // Filter the restraunt cards and update the UI
               // searchText
-              console.log(searchText);
+              // console.log(searchText);
 
               const filteredRestaurant = listOfRestaurants.filter((res) =>
-                res.data.name.toLowerCase().includes(searchText.toLowerCase())
+                res.info.name.toLowerCase().includes(searchText.toLowerCase())
               );
 
               setFilteredRestaurant(filteredRestaurant);
@@ -62,10 +64,16 @@ const Body = () => {
         <button
           className="filter-btn"
           onClick={() => {
+            // console.log("------------before----------------")
+            // console.log(listOfRestaurants);
             const filteredList = listOfRestaurants.filter(
-              (res) => res.data.avgRating > 4
+              (res) => res.info.avgRating > 4.2
             );
-            setListOfRestraunt(filteredList);
+            // console.log(filteredList);
+            // // setListOfRestraunt();
+            setFilteredRestaurant(filteredList);
+            // console.log("------------after----------------")
+            // console.log(listOfRestaurants);
           }}
         >
           Top Rated Restaurants
@@ -74,8 +82,8 @@ const Body = () => {
       <div className="res-container">
         {filteredRestaurant.map((restaurant) => (
           <Link
-            key={restaurant.data.id}
-            to={"/restaurants/" + restaurant.data.id}
+            key={restaurant.info.id}
+            to={"/restaurants/" + restaurant.info.id}
           >
             <RestaurantCard resData={restaurant} />
           </Link>
