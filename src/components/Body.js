@@ -2,11 +2,13 @@ import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   // Local State Variable - Super powerful variable
   const [listOfRestaurants, setListOfRestraunt] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
+ 
 
   const [searchText, setSearchText] = useState("");
 
@@ -31,7 +33,12 @@ const Body = () => {
     setFilteredRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   };
 
-  return listOfRestaurants.length === 0 ? (
+
+ const online = useOnlineStatus();
+
+//  console.log(online);
+
+  return online? (listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
@@ -90,7 +97,7 @@ const Body = () => {
         ))}
       </div>
     </div>
-  );
+  )):"Something is wrong with your internet please check.";
 };
 
 export default Body;
