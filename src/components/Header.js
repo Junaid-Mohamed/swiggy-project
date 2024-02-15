@@ -7,7 +7,7 @@ const Header = () => {
   const [btnNameReact, setBtnNameReact] = useState("Login");
   //console.log("Header render");
   const online = useOnlineStatus();
-  console.log(online)
+
   return (
     <div className="flex justify-between bg-green-100 shadow-lg">
       <div className="w-36">
