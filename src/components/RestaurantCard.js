@@ -3,6 +3,7 @@ import { CDN_URL } from "../utils/constants";
 const RestaurantCard = (props) => {
   const { resData } = props;
 
+  // console.log(resData?.info);
   const {
     cloudinaryImageId,
     name,
@@ -27,5 +28,18 @@ const RestaurantCard = (props) => {
     </div>
   );
 };
+
+// Higher order component
+export const withVegLabel = (RestaurantCard) =>{
+      return(props)=>{
+        return(
+          <div>
+            <p className="absolute bg-black text-white p-2 m-1 rounded-lg">Veg</p>
+            <RestaurantCard {...props} />
+          </div>
+        )
+      }
+} 
+
 
 export default RestaurantCard;

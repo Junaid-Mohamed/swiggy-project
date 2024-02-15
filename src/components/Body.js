@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard,{withVegLabel} from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -11,6 +11,8 @@ const Body = () => {
  
 
   const [searchText, setSearchText] = useState("");
+
+  const VegRestaurantCard = withVegLabel(RestaurantCard);
 
   // Whenever state variables update, react triggers a reconciliation cycle(re-renders the component)
   // console.log("Body Rendered");
@@ -42,17 +44,17 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="filter flex">
+        <div className="search m-4 p-4">
           <input
             type="text"
-            className="search-box"
+            className="border border-solid border-black"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
-          <button
+          <button className="px-4 py-2 m-4 bg-green-200 rounded-lg"
             onClick={() => {
               // Filter the restraunt cards and update the UI
               // searchText
@@ -68,8 +70,9 @@ const Body = () => {
             Search
           </button>
         </div>
+        <div className="flex justify-center" >
         <button
-          className="filter-btn"
+          className="bg-gray-300"
           onClick={() => {
             // console.log("------------before----------------")
             // console.log(listOfRestaurants);
@@ -85,6 +88,8 @@ const Body = () => {
         >
           Top Rated Restaurants
         </button>
+        </div>
+       
       </div>
       <div className="res-container">
         {filteredRestaurant.map((restaurant) => (
@@ -92,7 +97,10 @@ const Body = () => {
             key={restaurant.info.id}
             to={"/restaurants/" + restaurant.info.id}
           >
-            <RestaurantCard resData={restaurant} />
+            {
+              restaurant.info.veg?<VegRestaurantCard resData={restaurant}/>:<RestaurantCard resData={restaurant} />
+            }
+            
           </Link>
         ))}
       </div>
