@@ -1,11 +1,13 @@
 import { ItemList } from "./ItemList";
 import {useState} from "react";
-export const RestaurantCategory = ({data})=>{
+export const RestaurantCategory = ({data,showItem,setShowIndex})=>{
 
-  const [showItem,setShowItems] = useState(false);
+  // const [showItem,setShowItems] = useState(false);
+  const [collapse,setCollapse] = useState(false);
   
   const handleClick = () =>{
-    setShowItems(!showItem)
+   setShowIndex();
+   setCollapse(!collapse)
   }
 
     return(
@@ -19,7 +21,7 @@ export const RestaurantCategory = ({data})=>{
         </div>
         {/*Accodian body */}
 
-       {showItem && <ItemList  items={data.itemCards} />}
+       { collapse && showItem && <ItemList  items={data.itemCards} />}
           </div>
             
         </div>

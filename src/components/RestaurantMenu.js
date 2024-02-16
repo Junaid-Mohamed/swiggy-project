@@ -6,6 +6,7 @@ import { RestaurantCategory } from "./RestaurantCateogry";
 
 const RestaurantMenu = () => {
   const [resInfo, setResInfo] = useState(null);
+  const [showIndex,setShowIndex] = useState(null);
 
   const { resId } = useParams();
 
@@ -38,7 +39,7 @@ const RestaurantMenu = () => {
         {cuisines.join(", ")} - {costForTwoMessage}
       </p> 
       {/* accordian cateogries */}
-      {categories.map((category)=> <RestaurantCategory data={category?.card?.card}/> )}
+      {categories.map((category,index)=> <RestaurantCategory setShowIndex={()=>setShowIndex(index)} showItem={index === showIndex && true} data={category?.card?.card}/> )}
     </div>
   );
 };
