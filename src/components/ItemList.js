@@ -2,7 +2,19 @@
 // import {CDN_URL} from "../utils/constants" 
 // import { LOGO_URL } from "../utils/constants";
 
+import { useDispatch } from "react-redux"
+import { addItem } from "../utils/cartSlice";
+
 export const ItemList = ({items}) =>{
+
+    const dispatch = useDispatch();
+
+    const handleAdd = (item) =>{
+        // dispatch an acion
+        dispatch(addItem(item))
+        // whatever you'll pass inside this is the payload.
+    }
+
     return(
         <div>
            {items.map((item)=>(
@@ -18,7 +30,7 @@ export const ItemList = ({items}) =>{
                 </div>
                 <div className="w-3/12 p-2">
                     <div className="absolute" >
-                        <button className="pl-1 mt-1 bg-black text-white shadow-lg" >Add+</button>
+                        <button className="pl-1 mt-1 bg-black text-white shadow-lg" onClick={()=>handleAdd(item)} >Add+</button>
                     </div>
                     <img className="w-36" src={"https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/"+item.card.info.imageId} /></div>
              </div>
@@ -26,3 +38,6 @@ export const ItemList = ({items}) =>{
         </div>
     )
 }
+
+// learn the difference of this.
+// onClick={()=>handleAdd(item)} vs onClick={handleAdd(item)} vs onClick={handleAdd(item)}
