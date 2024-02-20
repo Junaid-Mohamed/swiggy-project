@@ -90,4 +90,5 @@ import {Component} from "path";
  - Install Babel dependencies
  - Configure Babel
  - Configure Parcel config file to disable default Babel transpilation.
- 
+ - Jest configuration - npx jest --init
+ - Install jsdom library
