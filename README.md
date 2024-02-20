@@ -78,3 +78,16 @@ import {Component} from "path";
  - slices (cart slice in this ex)
  - dispatch(action)
  - selector
+
+ # Types of tesing (Developer)
+ - Unit Testing
+ - Integrated Testing
+ - E2E testing using tools (not developer scene)
+
+ # Setting up of Testing in app
+ - Install React Testing library
+ - Install jest
+ - Install Babel dependencies
+ - Configure Babel
+ - Configure Parcel config file to disable default Babel transpilation.
+ 
