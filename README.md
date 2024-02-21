@@ -92,3 +92,6 @@ import {Component} from "path";
  - Configure Parcel config file to disable default Babel transpilation.
  - Jest configuration - npx jest --init
  - Install jsdom library
+ - Install @babel/preset-react - to make JSX work in test cases
+ - Include @babel/preset-react inside my babel config file
+ - Install @testing-library/jest-dom - for document to load 
